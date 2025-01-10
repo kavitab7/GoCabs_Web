@@ -27,13 +27,15 @@ const captainSchema = new mongoose.Schema({
         select: false,
     },
     socketId: {
-        type: String
+        type: String,
     },
+
     status: {
         type: String,
         enum: ['active', 'inactive'],
-        default: 'inactive'
+        default: 'inactive',
     },
+
     vehicle: {
         color: {
             type: String,
@@ -56,28 +58,34 @@ const captainSchema = new mongoose.Schema({
             enum: ['car', 'motorcycle', 'auto'],
         }
     },
+
     location: {
         ltd: {
-            type: Number
+            type: Number,
         },
         lng: {
-            type: Number
+            type: Number,
         }
     }
 })
 
 
 captainSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' })
-    return token
+    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    return token;
 }
+
 
 captainSchema.methods.comparePassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
-captainSchema.methods.hashPassword = async function (password) {
-    return await bcrypt.hash(password, 10);
-};
 
-const captainModel = mongoose.model('captain', captainSchema);
+captainSchema.statics.hashPassword = async function (password) {
+    return await bcrypt.hash(password, 10);
+}
+
+const captainModel = mongoose.model('captain', captainSchema)
+
+
+module.exports = captainModel;

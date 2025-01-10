@@ -18,7 +18,7 @@ const UserLogin = () => {
             password: password,
         };
 
-        const response = await axios.post(`${import.meta.env.BASE_URL}/users/login`, userData);
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`, userData);
 
         if (response.status === 200) {
             const data = response.data;

@@ -23,8 +23,8 @@ const UserSignup = () => {
             password: password,
         };
 
-        const response = await axios.post(`${import.meta.env.BASE_URL}/users/register`, newUser);
-
+        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, newUser);
+        console.log(process.env.REACT_APP_BASE_URL)
         if (response.status === 201) {
             const data = response.data;
             setUser(data.user);

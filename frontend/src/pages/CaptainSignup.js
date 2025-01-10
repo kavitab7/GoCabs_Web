@@ -24,9 +24,10 @@ const CaptainSignup = () => {
             vehicle: { color: vehicleColor, plate: vehiclePlate, capacity: vehicleCapacity, vehicleType },
         };
         const response = await axios.post(
-            `${import.meta.env.BASE_URL}/captains/register`,
+            `${process.env.REACT_APP_BASE_URL}/captains/register`,
             captainData
         );
+
         if (response.status === 201) {
             const data = response.data;
             setCaptain(data.captain);
@@ -44,7 +45,7 @@ const CaptainSignup = () => {
     };
 
     return (
-        <div className="h-screen bg-gradient-to-br from-gray-800 to-gray-900 flex justify-center items-center">
+        <div className="h-screen flex justify-center items-center">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                 <img
                     className="w-24 mx-auto rounded-full mb-6"

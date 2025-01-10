@@ -6,7 +6,7 @@ export const CaptainLogout = () => {
     const token = localStorage.getItem('captain-token')
     const navigate = useNavigate()
 
-    axios.get(`${import.meta.env.BASE_URL}/captains/logout`, {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/captains/logout`, {
         headers: {
             Authorization: `Bearer ${token}`
         }

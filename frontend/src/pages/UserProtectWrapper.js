@@ -13,7 +13,7 @@ const UserProtectWrapper = ({ children }) => {
         if (!token) {
             navigate('/login')
         }
-        axios.get(`${import.meta.env.BASE_URL}/users/profile`, {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/users/profile`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

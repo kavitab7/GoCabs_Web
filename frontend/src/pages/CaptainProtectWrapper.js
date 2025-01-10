@@ -14,7 +14,7 @@ export const CaptainProtectWrapper = ({ children }) => {
         if (!token) {
             navigate('/captain-login')
         }
-        axios.get(`${import.meta.env.BASE_URL}/captains/profile`, {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/captains/profile`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

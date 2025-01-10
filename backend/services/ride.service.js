@@ -53,6 +53,7 @@ module.exports.createRide = async ({
         throw new Error('All fields are required');
     }
 
+    const fare = await getFare(pickup, destination);
     const ride = rideModel.create({
         user, pickup, destination,
         otp: getOtp(6),
@@ -77,7 +78,7 @@ module.exports.confirmRide = async ({
 
     const ride = await rideModel.findOne({
         _id: rideId
-    }).populate('user').populate('captain').select(+otp);
+    }).populate('user').populate('captain').select('+otp');
 
     if (!ride) {
         throw new Error('Ride not found');
@@ -92,7 +93,7 @@ module.exports.startRide = async ({ rideId, otp, captain }) => {
     }
     const ride = await rideModel.findOne({
         _id: rideId
-    }).populate('user').populate('captain').select(+otp);
+    }).populate('user').populate('captain').select('+otp');
 
     if (!ride) {
         throw new Error('Ride not found');
@@ -115,12 +116,12 @@ module.exports.startRide = async ({ rideId, otp, captain }) => {
 
 
 module.exports.endRide = async ({ rideId, captain }) => {
-    if (!ride) {
+    if (!rideId) {
         throw new Error('Ride id is required');
     }
     const ride = await rideModel.findOne({
         _id: rideId, captain: captain._id
-    }).populate('user').populate('captain').select(+otp);
+    }).populate('user').populate('captain').select('+otp');
 
     if (!ride) {
         throw new Error('Ride not found');
